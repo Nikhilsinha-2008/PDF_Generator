@@ -10,7 +10,18 @@ for index, content in file_content:
     pdf.set_text_color(100, 100, 100)
     pdf.set_line_width(0.8)
     pdf.add_page()
-    pdf.cell(w=0, h=24, align="L", border=0, ln=1, txt=f"{index + 1}. {content["Topic"]}")  # type: ignore
+    pdf.cell(
+        w=0,
+        h=24,
+        align="L",
+        border=0,
+        ln=1,
+        txt=f"{index + 1}. {content["Topic"]}",  # type: ignore
+    )
+    # Adding single line for writing
+    for lines in range(0, 255, 15):
+        pdf.set_line_width(0.5)
+        pdf.line(x1=10, y1=30 + lines, x2=200, y2=30 + lines)
     # Setting the footer with Topic + Page number
     pdf.ln(252)
     page_num = pdf.page_no()
@@ -31,6 +42,10 @@ for index, content in file_content:
         pdf.line(x1=10, y1=15, x2=10, y2=285)
         pdf.set_line_width(0.5)
         pdf.line(x1=10, y1=285, x2=200, y2=285)
+        # Adding single line for writing
+        for lines in range(0, 270, 15):
+            pdf.set_line_width(0.5)
+            pdf.line(x1=10, y1=15 + lines, x2=200, y2=15 + lines)
         # Footer in Extra pages
         pdf.ln(275)
         page_num_extra = pdf.page_no()
